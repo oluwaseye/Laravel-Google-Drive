@@ -55,7 +55,7 @@ class DriveController extends Controller
         $query = "visibility='anyoneCanFind' or visibility='anyoneWithLink' and mimeType != 'application/vnd.google-apps.folder' and '" . $id . "' in parents and trashed=false";
 
         $optParams = [
-            'fields' => 'files(id, name, mimeType, thumbnailLink, size, ownedByMe, originalFilename, hasThumbnail, sharedWithMeTime, webViewLink, webContentLink)',
+            'fields' => 'files(id, name, mimeType, thumbnailLink, size, ownedByMe, originalFilename, hasThumbnail, sharedWithMeTime, webViewLink, webContentLink, iconLink)',
             'q' => $query,
             'pageSize' => 500,
         ];
@@ -66,15 +66,24 @@ class DriveController extends Controller
             print "No files found.\n";
         } else {
             echo "Files", "<br><br>";
-            echo "<pre>";
+            // echo "<pre>";
             foreach ($results->getFiles() as $file) {
                 //   dump($file->getName(), $file->getID());
 
-                \print_r($file);
+                //  \print_r($file);
 
-                //echo "<strong>file id</strong>: " . $file->id . " <strong>file name</strong>: " . $file->name . " <strong>file ext</strong>: " . $file->mimeType . " <br><br>";
+                echo "<strong>file id</strong>: " . $file->id .
+                    "<br><strong>file name</strong>: " . $file->name .
+                    " <br><strong>file ext</strong>: " . $file->mimeType .
+                    " <br><strong>file size</strong>: " . $file->size .
+                    " <br><strong>file hasThumbnail</strong>: " . $file->hasThumbnail .
+                    " <br><strong>file iconLink</strong>: " . $file->iconLink .
+                    " <br><strong>file thumbnailLink</strong>: " . $file->thumbnailLink .
+                    " <br><strong>file webContentLink</strong>: " . $file->webContentLink .
+                    " <br><strong>file webViewLink</strong>: " . $file->webViewLink .
+                    " <br><br>";
             }
-            echo "</pre>";
+            // echo "</pre>";
         }
     }
 
